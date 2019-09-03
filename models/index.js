@@ -7,7 +7,7 @@ mongoose.connect(DB_URL, {
     useCreateIndex: true,
 })
     .then(() => console.log('MongoDB connected'))
-    .catch(() => console.log('error'));
+    .catch(() => console.log('MongoDB is not connected'));
 
 module.exports = {
     User: require('./User'),
