@@ -10,6 +10,10 @@ const PostSchema = new Schema({
         type: String,
         maxlength: 250,
     },
+    time_posted: {
+        type: Date,
+        default: Date.now()
+    },
     restaurant: {
         type: Schema.Types.ObjectId,
         ref: 'Restaurant'

@@ -4,69 +4,64 @@ function getTime() {
     return new Date().toLocaleString();
 };
 
-const createUser = (req, res) => {
-    db.User.create(req.body, (error, createdUser) => {
-        if (error) return res.status(400).json(
-            {
-                status: 400,
-                message: 'Something went wrong please try again'
-            });
+const create = (req, res) => {
+    db.Post.create(req.body, (error, createdUser) => {
+        if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,
             data: createdUser,
             requestedAt: getTime()
         });
-        console.log(createdUser);
-    })
+    });
 };
 
 const index = (req, res) => {
-    db.User.find({}, { password: 0, _v: 0 }, (error, allUsers) => {
+    db.Post.find({}, (error, allPosts) => {
         if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,
-            number_of_results: allUsers.length,
-            data: allUsers,
+            number_of_results: allPosts.length,
+            data: allPosts,
             requestedAt: getTime()
         });
     });
 };
 
 const show = (req, res) => {
-    db.User.findById(req.params.id, (error, foundUser) => {
+    db.Post.findById(req.params.id, (error, foundPost) => {
         if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,
-            data: foundUser,
+            data: foundPost,
             requestedAt: getTime()
-        })
-    })
-}
+        });
+    });
+};
 
 const destroy = (req, res) => {
-    db.User.findByIdAndDelete(req.params.id, (error, deletedUser) => {
-        if (error) return res.status(500).json({ status: 500, message: 'Could not delete user' });
+    db.Post.findByIdAndDelete(req.params.id, (error, deletedPost) => {
+        if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,
-            data: 'User successfully deleted',
+            data: 'Successfully deleted post',
             requestedAt: getTime()
         });
     });
 };
 
 const edit = (req, res) => {
-    db.User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, editedUser) => {
+    db.Post.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, updatedPost) => {
         if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,
-            data: editedUser,
+            data: updatedPost,
             requestedAt: getTime()
         });
-    });
-};
+    })
+}
 
 module.exports = {
-    createUser,
+    create,
     index,
     show,
     destroy,
