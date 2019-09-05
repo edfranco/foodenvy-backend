@@ -33,14 +33,16 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-    db.User.findById(req.params.id, (error, foundUser) => {
-        if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
-        res.status(200).json({
-            status: 200,
-            data: foundUser,
-            requestedAt: getTime()
+    db.User.findById(req.params.id)
+        .populate('posts')
+        .exec((error, foundUser) => {
+            if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
+            res.status(200).json({
+                status: 200,
+                data: foundUser,
+                requestedAt: getTime()
+            })
         })
-    })
 }
 
 const destroy = (req, res) => {

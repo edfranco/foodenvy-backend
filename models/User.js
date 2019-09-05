@@ -8,6 +8,13 @@ const UserSchema = new Schema({
         required: true,
         maxlength: 30,
     },
+    name: {
+        type: String,
+    },
+    bio: {
+        type: String,
+        maxlength: 250
+    },
     password: {
         type: String,
         required: true,

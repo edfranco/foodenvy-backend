@@ -14,15 +14,12 @@ const PostSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    restaurant: {
-        type: Schema.Types.ObjectId,
-        ref: 'Restaurant'
+    user_id: {
+        type: String
     },
-    user:
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    restaurant_name: {
+        type: String
+    }
 })
 
 const Post = mongoose.model('Post', PostSchema);
