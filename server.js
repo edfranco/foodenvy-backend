@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const cors = require('cors');
 const app = express();
 const routes = require('./routes');
 
@@ -7,8 +8,17 @@ const routes = require('./routes');
 app.use(express.json());
 
 app.use(session({
-    secret: 'tree fiddy'
-}))
+    secret: 'tree fiddy',
+    resave: false,
+    saveUninitialized: false
+}));
+
+const corsOptions = {
+    origin: ['http://localhost:3000'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // routes
 app.use(`/api/v1/users`, routes.users);

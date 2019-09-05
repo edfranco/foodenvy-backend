@@ -30,13 +30,10 @@ const register = (req, res) => {
     if (errors.length) {
         return res.status(500).json({ status: 500, errors })
     }
-
-
     bcrypt.genSalt(10, (error, salt) => {
         if (error) return res.status(500).json({ status: 500, message: 'the error is here' })
 
         bcrypt.hash(body.password, salt, (error, hash) => {
-            console.log(error)
             if (error) return res.status(500).json({
                 status: 500,
                 message: 'Something went wrong. Please try again.'
@@ -46,7 +43,6 @@ const register = (req, res) => {
                 email: body.email,
                 password: hash
             };
-            console.log(newUser)
             db.User.create(newUser, (error, createdUser) => {
                 if (error) return res.status(500).json({ status: 500, message: 'Could not create user' })
                 res.status(200).json({
@@ -62,6 +58,7 @@ const register = (req, res) => {
 const login = (req, res) => {
     const body = req.body;
     if (!body.email || !body.password) {
+        console.log(body.email, body.password)
         return res.status(500).json({ status: 500, message: 'Please enter an email and/or password' });
     };
     db.User.findOne({ email: body.email }, (error, foundUser) => {
@@ -81,13 +78,25 @@ const login = (req, res) => {
     });
 };
 
-// const logout = (req,res)=> {
-//     req.session.destroy
-// }
+const logout = (req, res) => {
+    req.session.destroy(error => {
+        if (error) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
+        res.status(200).json({
+            status: 200,
+            data: 'Successfull logged out'
+        });
+    });
+};
+
+const verify = (req, res) => {
+    if (!req.session.currentUser) return res.status(401).json({ status: 401, message: 'Unauthorized. Please try again.' });
+    res.status(200).json({ status: 200, message: 'Current User Verified.' });
+}
 
 module.exports = {
     register,
     login,
-
+    logout,
+    verify
 }
 
