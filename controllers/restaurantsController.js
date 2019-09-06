@@ -28,7 +28,7 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-    db.Restaurant.findById(req.params.id, (error, foundRestaurant) => {
+    db.Restaurant.findOne({ slug: req.params.slug }, (error, foundRestaurant) => {
         if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
         res.status(200).json({
             status: 200,

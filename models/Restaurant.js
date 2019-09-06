@@ -26,7 +26,10 @@ const RestaurantSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Post'
         }
-    ]
+    ],
+    slug: {
+        type: String
+    }
 });
 
 const Restaurant = mongoose.model('Restaurant', RestaurantSchema);

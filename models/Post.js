@@ -19,7 +19,10 @@ const PostSchema = new Schema({
     },
     restaurant_name: {
         type: String
-    }
+    },
+    restaurant_slug: {
+        type: String
+    },
 })
 
 const Post = mongoose.model('Post', PostSchema);
