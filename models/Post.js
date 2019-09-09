@@ -15,7 +15,8 @@ const PostSchema = new Schema({
         default: Date.now()
     },
     user_id: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
     restaurant_name: {
         type: String

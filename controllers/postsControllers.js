@@ -26,7 +26,7 @@ const create = (req, res) => {
                 console.log(user);
             });
 
-        db.Restaurant.findOneAndUpdate({ name: req.body.restaurant_name }, { new: true }, (error, foundRestaurant) => {
+        db.Restaurant.findOneAndUpdate({ slug: req.body.restaurant_slug }, { new: true }, (error, foundRestaurant) => {
             if (error) return console.log(error);
             foundRestaurant.posts.push(createdPost);
             foundRestaurant.save();

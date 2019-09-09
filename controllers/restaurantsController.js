@@ -28,14 +28,23 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-    db.Restaurant.findOne({ slug: req.params.slug }, (error, foundRestaurant) => {
-        if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
-        res.status(200).json({
-            status: 200,
-            data: foundRestaurant,
-            requestedAt: getTime()
+    db.Restaurant.findOne({ slug: req.params.slug })
+        .populate({
+            path: 'posts',
+            model: 'Post',
+            populate: {
+                path: 'user_id',
+                model: 'User'
+            }
+        })
+        .exec((error, foundRestaurant) => {
+            if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
+            res.status(200).json({
+                status: 200,
+                data: foundRestaurant,
+                requestedAt: getTime()
+            });
         });
-    });
 };
 
 const edit = (req, res) => {
