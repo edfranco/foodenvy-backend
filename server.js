@@ -14,7 +14,7 @@ app.use(session({
 }));
 
 const corsOptions = {
-    origin: ['http://localhost:3000'],
+    origin: ["https://edfranco.github.io/foodenvy-frontend"],
     credentials: true,
     optionsSuccessStatus: 200
 };
@@ -26,5 +26,6 @@ app.use(`/api/v1/posts`, routes.posts);
 app.use(`/api/v1/restaurants`, routes.restaurants);
 app.use(`/api/v1/auth`, routes.auth);
 app.use('/api/v1/maps', routes.maps);
+app.use('/uploads', express.static('uploads'));
 
 app.listen(4000, console.log('server is live at port'));
