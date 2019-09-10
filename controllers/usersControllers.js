@@ -34,7 +34,14 @@ const index = (req, res) => {
 
 const show = (req, res) => {
     db.User.findById(req.params.id)
-        .populate('posts')
+        .populate({
+            path: 'posts',
+            model: 'Post',
+            populate: {
+                path: 'user_id',
+                model: 'User'
+            }
+        })
         .exec((error, foundUser) => {
             if (error) return res.status(500).json({ status: 500, message: 'Something went wrong' });
             res.status(200).json({

@@ -13,8 +13,6 @@ const create = (req, res) => {
             requestedAt: getTime()
         });
 
-
-
         db.User.findByIdAndUpdate(req.body.user_id, { new: true }, (error, foundUser) => {
             if (error) return console.log(error);
             foundUser.posts.push(createdPost);

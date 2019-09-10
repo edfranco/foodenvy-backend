@@ -13,7 +13,8 @@ const UserSchema = new Schema({
     },
     bio: {
         type: String,
-        maxlength: 250
+        maxlength: 250,
+        default: 'This is your bio'
     },
     password: {
         type: String,
