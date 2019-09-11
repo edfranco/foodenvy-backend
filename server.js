@@ -3,6 +3,7 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const routes = require('./routes');
+const PORT = process.env.PORT || 4000;
 
 
 app.use(express.json());
@@ -28,4 +29,4 @@ app.use(`/api/v1/auth`, routes.auth);
 app.use('/api/v1/maps', routes.maps);
 app.use('/uploads', express.static('uploads'));
 
-app.listen(4000, console.log('server is live at port'));
+app.listen(PORT, console.log(`server is live at port ${PORT}`));
