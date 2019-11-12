@@ -1,10 +1,6 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 
-function getTime() {
-    return new Date().toLocaleString();
-};
-
 const register = (req, res) => {
     const errors = [];
     const body = req.body;
@@ -49,7 +45,6 @@ const register = (req, res) => {
                     status: 200,
                     data: createdUser
                 });
-                console.log(createdUser);
             });
         });
     });
@@ -58,7 +53,6 @@ const register = (req, res) => {
 const login = (req, res) => {
     const body = req.body;
     if (!body.email || !body.password) {
-        console.log(body.email, body.password)
         return res.status(500).json({ status: 500, message: 'Please enter an email and/or password' });
     };
     db.User.findOne({ email: body.email }, (error, foundUser) => {

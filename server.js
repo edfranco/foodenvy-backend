@@ -15,7 +15,7 @@ app.use(session({
 }));
 
 const corsOptions = {
-    origin: ["https://edfranco.github.io"],
+    origin: ["https://edfranco.github.io", "http://localhost:3000"],
     credentials: true,
     optionsSuccessStatus: 200
 };
