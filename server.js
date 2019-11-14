@@ -14,12 +14,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-const corsOptions = {
-    origin: ["https://edfranco.github.io/foodenvy-frontend/"],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 // routes
 app.use(`/api/v1/users`, routes.users);
