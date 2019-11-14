@@ -14,7 +14,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(cors());
+const corsOptions = {
+    origin: [/\.edfranco.github\.io$/,],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // routes
 app.use(`/api/v1/users`, routes.users);
