@@ -15,8 +15,7 @@ app.use(session({
 }));
 
 const corsOptions = {
-    origin: [/\.edfranco.github\.io$/,],
-    credentials: true,
+    origin: ['https://edfranco.github.io/foodenvy-frontend/'],
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
