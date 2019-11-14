@@ -14,12 +14,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
-// const corsOptions = {
-//     origin: ["https://edfranco.github.io"],
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+    origin: ["https://edfranco.github.io/food-envy"],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // routes
 app.use(`/api/v1/users`, routes.users);
